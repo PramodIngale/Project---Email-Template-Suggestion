@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run email-template-api.py
+web: sh setup.sh && streamlit run test.py

@@ -4,3 +4,4 @@ pickleshare==0.7.5
 python-docx==0.8.11
 scikit-learn==0.23.2
 streamlit==0.83.0
+python-time==0.3.0

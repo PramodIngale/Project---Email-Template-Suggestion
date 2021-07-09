@@ -92,5 +92,5 @@ if rad == "Application Description":
     st.markdown("""> 2. Enter the relavnt keywords as per user requirement and click on search button.<br>
     **Note:** *Some of the valid keywords are as follows: Leave request, Resignation, Job application, Request for credit card, Complaints of defective products, Request for passbook, Cancellation of internet services, Request for refund, College admission application, Loan application, Sick leave etc.*  """, True)
     st.image("keyword and search button.PNG", width=500)
-    st.markdown("""> 3. The nearest template based on the keywords will be diplayed on the screen and will be copied to clipboard.""", True)
+    st.markdown("""> 3. The nearest template based on the keywords will be diplayed on the screen.""", True)
     st.image("template display.PNG", width=500)

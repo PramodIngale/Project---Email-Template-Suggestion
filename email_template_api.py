@@ -1,0 +1,94 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# Libraries
+import pandas as pd
+from pickle import load
+import streamlit as st
+import docx
+import time
+import clipboard
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+#Trained models
+
+vectorizer_model = load(open("Vectorizer_model_BOW.sav", "rb"))
+classification_model = load(open("Classification_model.sav", "rb"))
+
+#Email class dictionary
+class_dict = {0: "Bank Services application", 1: 'Bank loan application', 2: 'Cancellation of services',
+              3: 'College admission application',4: 'Compliants of defective products', 5: 'Job application',
+                6: 'Leave request',7: 'Refund query',8: 'Resignation'}
+
+
+#---------------Header---------------------------------------------------------------------------------
+
+st.title('''Email Template Suggestion''')
+st.image("header_image.jpg", width=500)
+
+#---------------Navigation Buttons---------------------------------------------------------------------------------
+
+rad = st.sidebar.radio("Select", ["Home", "Application Description"])
+
+##-------------Navigation - Home------------------
+if rad == "Home":
+    keywords = st.text_input("Enter the Keywords and Click on Search") #Input from user
+    keyword_button = st.button("Search")
+    if  keyword_button == True:  
+        
+        if keywords == "": 
+            st.subheader("Template")
+            st.error("Please enter some keywords and click on search")
+        else:
+            my_bar = st.progress(0) #Progress bar
+            for p in range(100):
+                time.sleep(0.001)
+                my_bar.progress(p + 1)
+            #Vectorization and class prediction
+            array = vectorizer_model.transform(pd.Series(keywords))
+            class_probability = classification_model.predict_proba(array)
+            
+            probability = "bad"
+            for prob_val in class_probability[0]:
+                if prob_val > 0.30:
+                    probability = "Good"
+                
+            if probability != "Good":
+                st.error("Keywords are not suffiecient, please try adding few more and click on search")
+            else:   
+                email_class = classification_model.predict(array)
+                teamplate_name = class_dict.get(email_class[0])
+
+                st.subheader("Template")    
+                st.write("Subject: ",teamplate_name)
+
+                #Output template display
+                st.markdown("# ------------------------------------------------", True)
+                template_conetnt = docx.Document(teamplate_name+".docx")
+                template = f"""Subject: {teamplate_name}"""
+                for para in template_conetnt.paragraphs:
+                    st.markdown(para.text)
+                    template = template + "\n" + para.text
+                st.markdown("# ------------------------------------------------", True)
+                clipboard.copy(template)
+                st.success("NOTE: Template is copied to clipboard")
+       
+    if keyword_button == False:
+        st.write("Waiting for user to enter the Keywords...............!!!!")
+
+#-------------Navigation - Application Description------------------       
+if rad == "Application Description":
+    st.header("Purpose")
+    st.markdown("**Email Template Suggestion API is developed to suggest email template to the user based on the keywords provided by them.**", True)
+    st.header("Adavantages")
+    st.markdown("""* Quick suggestion of template based on the keywords.""", True)
+    st.markdown("""* Easy to use.""",True)
+    st.header("How to Use")
+    st.markdown("""**This section describes API user interface.**""", True)
+    st.markdown("""> 1. Go to home page.""", True)
+    st.image("Home page.PNG", width=500)
+    st.markdown("""> 2. Enter the relavnt keywords as per user requirement and click on search button.<br>
+    **Note:** *Some of the valid keywords are as follows: Laeve request, Resignation, Job application, Request fro credit card, Compliants of defective products, Reqest for passbook, Cancellation of internet services, Request for refund, College addmission application, Loan application, Sick leave etc.*  """, True)
+    st.image("keyword and search button.PNG", width=500)
+    st.markdown("""> 3. The nearest template based on the keywords will be diplayed on the screen and will be copied to clipboard.""", True)
+    st.image("template display.PNG", width=500)

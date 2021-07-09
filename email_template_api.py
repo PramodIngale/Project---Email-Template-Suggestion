@@ -2,7 +2,6 @@
 # coding: utf-8
 
 # Libraries
-import pandas as pd
 from pickle import load
 import streamlit as st
 import docx
@@ -11,7 +10,6 @@ import clipboard
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 #Trained models
-
 vectorizer_model = load(open("Vectorizer_model_BOW.sav", "rb"))
 classification_model = load(open("Classification_model.sav", "rb"))
 
@@ -47,7 +45,7 @@ if rad == "Home":
             #Vectorization and class prediction
             array = vectorizer_model.transform(pd.Series(keywords))
             class_probability = classification_model.predict_proba(array)
-            
+           
             probability = "bad"
             for prob_val in class_probability[0]:
                 if prob_val > 0.30:

@@ -2,6 +2,7 @@
 # coding: utf-8
 
 # Libraries
+import pandas as pd
 from pickle import load
 import streamlit as st
 import docx

@@ -70,7 +70,7 @@ if rad == "Home":
                     st.markdown(para.text)
                     template = template + "\n" + para.text
                 st.markdown("# ------------------------------------------------", True)
-#                 clipboard.copy(template)
+                clipboard.copy(template)
                 st.success("NOTE: Template is copied to clipboard")
        
     if keyword_button == False:

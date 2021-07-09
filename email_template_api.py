@@ -71,7 +71,7 @@ if rad == "Home":
                     template = template + "\n" + para.text
                 st.markdown("# ------------------------------------------------", True)
 #                 clipboard.copy(template)
-#                 st.success("NOTE: Template is copied to clipboard")
+                st.success("NOTE: Template is copied to clipboard")
        
     if keyword_button == False:
         st.write("Waiting for user to enter the Keywords...............!!!!")

@@ -78,7 +78,7 @@ if rad == "Home":
 #-------------Navigation - Application Description------------------       
 if rad == "Application Description":
     st.header("Purpose")
-    st.markdown("**Email Template Suggestion API is developed to suggest email template to the user based on the keywords provided by them.**", True)
+    st.markdown("**Email Template Suggestion API is developed to suggest email template to the users based on the keywords provided by them.**", True)
     st.header("Adavantages")
     st.markdown("""> * Quick suggestion of template based on the keywords.""", True)
     st.markdown("""> * Easy to use.""",True)
@@ -86,10 +86,10 @@ if rad == "Application Description":
     st.markdown("""> * Time saving.""",True)
     st.header("How to Use")
     st.markdown("""**This section describes API user interface.**""", True)
-    st.markdown("""> 1. Go to home page.""", True)
+    st.markdown("""> 1. Go to Home.""", True)
     st.image("Home page.PNG", width=500)
-    st.markdown("""> 2. Enter the relavnt keywords as per user requirement and click on search button.<br>
-    **Note:** *Some of the valid keywords are as follows: Leave request, Resignation, Job application, Request for credit card, Complaints of defective products, Request for passbook, Cancellation of internet services, Request for refund, College admission application, Loan application, Sick leave etc.*  """, True)
+    st.markdown("""> 2. Enter the relavnt keywords and click on Search button.<br>
+        *Some of the valid keywords are as follows: Leave request, Resignation, Job application, Request for credit card, Complaints of defective products, Request for passbook, Cancellation of internet services, Request for refund, College admission application, Loan application, Sick leave etc.*  """, True)
     st.image("keyword and search button.PNG", width=500)
-    st.markdown("""> 3. The nearest template based on the keywords will be diplayed on the screen.""", True)
+    st.markdown("""> 3. A template will be diplayed on the screen.""", True)
     st.image("template display.PNG", width=500)
